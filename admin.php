@@ -29,7 +29,7 @@
 
                         <!-- Land Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="land.php" class="card-link">
+                            <a href="land.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/land-icon.svg" alt="Land Icon"/>
@@ -41,7 +41,7 @@
 
                         <!-- Ledger Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="ledger.php" class="card-link">
+                            <a href="ledger.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/ledger-icon.svg" alt="Ledger Icon"/>
@@ -53,7 +53,7 @@
 
                         <!-- Inventory Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="inventory.php" class="card-link">
+                            <a href="inventory.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/inventory-icon.svg" alt="Inventory Icon"/>

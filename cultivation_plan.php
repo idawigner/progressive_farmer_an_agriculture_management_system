@@ -1,144 +1,224 @@
-<!doctype html>
-<html lang="en">
-<?php include 'layouts/header.php'  ?>
+<!--Save Record into Database-->
+<?php
+//Including header
+include 'layouts/header.php';
+include 'db_conn.php';
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect form data
+    $taskType = $_POST['taskType'];
+    $date = $_POST['date'];
+    $crop = $_POST['crop'];
+    $estExpense = $_POST['estExpense'];
+
+    // Insert data into the database
+    $sql = "INSERT INTO cultivation_plan (taskType, date, crop, estExpense) VALUES ('$taskType', '$date', '$crop', $estExpense)";
+
+    if (mysqli_query($conn, $sql)) {
+        // Success
+        echo json_encode(array("status" => "success"));
+        exit; // Terminate the script after sending the response
+    } else {
+        // Error
+        echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
+        exit; // Terminate the script after sending the response
+    }
+}
+
+// Retrieve data from the database
+$sql = "SELECT * FROM cultivation_plan";
+$result = mysqli_query($conn, $sql);
+?>
+
+
 <body>
+<!-- Modal Container -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Entry</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Form -->
+                <form id="newRecordForm" method="post">
+                    <div class="form-group">
+                        <label for="taskType">Task Type:</label>
+                        <select class="form-control" id="taskType" name="taskType" required>
+                            <option value="">--Select--</option>
+                            <option value="Sowing">Sowing</option>
+                            <option value="Spray">Spray</option>
+                            <option value="Fertilize">Fertilize</option>
+                            <option value="Irrigate">Irrigate</option>
+                            <option value="Expense">Expense</option>
+                            <option value="Labour">Labour</option>
+                            <option value="Harvest">Harvest</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crop">Crop:</label>
+                        <input type="text" class="form-control" id="crop" name="crop" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estExpense">Est. Expense (Rs.):</label>
+                        <input type="number" class="form-control" id="estExpense" name="estExpense" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveRecord()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Container -->
+
 <div class="wrapper">
-
-
     <?php include 'layouts/plot_sidebar.php' ?>
     <div class="main-panel">
-
         <?php include 'layouts/menu.php' ?>
         <!-- End Navbar -->
         <div class="content">
             <div class="dashboard-area">
                 <div class="container-fluid">
+                    <!-- Page Title -->
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h3 style="color: #9DCD5A;">Cultivation Plan</h3>
+                        </div>
+                    </div>
+                    <!-- Cards Container -->
                     <div class="row">
 
-                        <div class="card-container col-lg-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- 1st Column (90% of card) -->
-                                        <div class="col-lg-9 info-card-content">
-                                            <h6 class="date">January 05, 2024</h6>
-                                            <p><strong>Medicine:</strong> Uria</p>
-                                            <p><strong>Amount:</strong> 2 Bags</p>
-                                            <p><strong>Cost:</strong> Rs. 5,000</p>
-                                        </div>
-                                        <!-- 2nd Column (Edit Icon) -->
-                                        <div class="col-lg-3 text-center edit-icon">
-                                            <a href="#">
-                                                <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
-                                            </a>
+                        <!-- Cards Container -->
+                        <div class="row">
+                            <?php while ($card = mysqli_fetch_assoc($result)) : ?>
+                                <div class="card-container col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body task-card-body">
+                                            <div class="row">
+                                                <div class="col-lg-9 col-md-9 col-sm-9 info-card-content">
+                                                    <?php
+                                                    // Define custom colors based on taskType
+                                                    $customColors = array(
+                                                        'Sowing' => '#D66708',
+                                                        'Spray' => '#E48F60',
+                                                        'Fertilize' => '#7D8CC4',
+                                                        'Irrigate' => '#5166B4',
+                                                        'Expense' => '#F15555',
+                                                        'Labour' => '#A955E8',
+                                                        'Harvest' => '#22B2BB',
+                                                        // Add more custom colors as needed
+                                                    );
+                                                    // Get taskType from the database
+                                                    $taskType = $card['taskType'];
+                                                    // Set default color if taskType is not in customColors
+                                                    $color = isset($customColors[$taskType]) ? $customColors[$taskType] : '#000000';
+                                                    $borderColor = $color;
+
+                                                    echo '<p class="plan-task-tag" style="color: ' . $color . '; border: 2px solid ' . $borderColor . ';">' . $taskType . '</p>';
+                                                    ?>
+                                                    <h6 class="date"><?php echo $card['date']; ?></h6>
+                                                    <p><strong>Crop:</strong> <?php echo $card['crop']; ?></p>
+                                                    <p><strong>Est. Expense:</strong> Rs. <?php echo intval($card['estExpense']); ?></p>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center edit-icon">
+                                                    <a href="#">
+                                                        <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endwhile; ?>
                         </div>
+                    </div>
 
-
-                        <div class="card-container col-lg-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- 1st Column (90% of card) -->
-                                        <div class="col-lg-9 info-card-content">
-                                            <h6 class="date">January 05, 2024</h6>
-                                            <p><strong>Medicine:</strong> Uria</p>
-                                            <p><strong>Amount:</strong> 2 Bags</p>
-                                            <p><strong>Cost:</strong> Rs. 5,000</p>
-                                        </div>
-                                        <!-- 2nd Column (Edit Icon) -->
-                                        <div class="col-lg-3 text-center edit-icon">
-                                            <a href="#">
-                                                <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Add New Record Button Container -->
+                    <div class="row">
+                        <div class="col-12 text-center mt-4">
+                            <button class="new-record-button" type="button" data-toggle="modal" data-target="#myModal">
+                                <img src="assets/img/icons/plus-icon.svg" alt="Plus Icon" class="new-record-button-icon">
+                                <span class="new-record-button-text">New Record</span>
+                            </button>
                         </div>
-
-
-                        <div class="card-container col-lg-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- 1st Column (90% of card) -->
-                                        <div class="col-lg-9 info-card-content">
-                                            <h6 class="date">January 05, 2024</h6>
-                                            <p><strong>Medicine:</strong> Uria</p>
-                                            <p><strong>Amount:</strong> 2 Bags</p>
-                                            <p><strong>Cost:</strong> Rs. 5,000</p>
-                                        </div>
-                                        <!-- 2nd Column (Edit Icon) -->
-                                        <div class="col-lg-3 text-center edit-icon">
-                                            <a href="#">
-                                                <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card-container col-lg-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- 1st Column (90% of card) -->
-                                        <div class="col-lg-9 info-card-content">
-                                            <h6 class="date">January 05, 2024</h6>
-                                            <p><strong>Medicine:</strong> Uria</p>
-                                            <p><strong>Amount:</strong> 2 Bags</p>
-                                            <p><strong>Cost:</strong> Rs. 5,000</p>
-                                        </div>
-                                        <!-- 2nd Column (Edit Icon) -->
-                                        <div class="col-lg-3 text-center edit-icon">
-                                            <a href="#">
-                                                <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card-container col-lg-4 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- 1st Column (90% of card) -->
-                                        <div class="col-lg-9 info-card-content">
-                                            <h6 class="date">January 05, 2024</h6>
-                                            <p><strong>Medicine:</strong> Uria</p>
-                                            <p><strong>Amount:</strong> 2 Bags</p>
-                                            <p><strong>Cost:</strong> Rs. 5,000</p>
-                                        </div>
-                                        <!-- 2nd Column (Edit Icon) -->
-                                        <div class="col-lg-3 text-center edit-icon">
-                                            <a href="#">
-                                                <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
 
+<!--    Close the database connection -->
+        <?php
+        mysqli_close($conn);
+        ?>
+
+<!--    Footer-->
         <?php include 'layouts/Footer.php' ?>
 
     </div>
-
 </div>
+
+<script>
+    function saveRecord() {
+        // Validate the form
+        if (validateForm()) {
+            // Get form values
+            var taskType = document.getElementById('taskType').value;
+            var date = document.getElementById('date').value;
+            var crop = document.getElementById('crop').value;
+            var estExpense = document.getElementById('estExpense').value;
+
+            // Create FormData object
+            var formData = new FormData();
+            formData.append('taskType', taskType);
+            formData.append('date', date);
+            formData.append('crop', crop);
+            formData.append('estExpense', estExpense);
+
+            // Make an AJAX request to handle form submission
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'cultivation_plan.php', true);
+            xhr.onload = function () {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    // Data successfully inserted, close the modal using Bootstrap modal method
+                    $('#myModal').modal('hide');
+
+                    // Optionally, you can update the card dynamically or reload the page here
+                    // For simplicity, I'll reload the page to fetch the updated data
+                    location.reload();
+                } else {
+                    // Error handling
+                    alert('Error: ' + response.message);
+                }
+            };
+            xhr.send(formData);
+        }
+    }
+
+    function validateForm() {
+        // You can implement your validation logic here
+        // For simplicity, I'm assuming all fields are required
+        var isValid = true;
+        var formElements = document.getElementById('newRecordForm').elements;
+        for (var i = 0; i < formElements.length; i++) {
+            if (formElements[i].type !== 'button' && formElements[i].value.trim() === '') {
+                isValid = false;
+                alert('Please fill in all fields.');
+                break;
+            }
+        }
+        return isValid;
+    }
+</script>
 
 </body>
 </html>

@@ -23,7 +23,7 @@
                     <div class="row">
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="cultivation_plan.php" class="card-link">
+                            <a href="cultivation_plan.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/cultivation-plan-icon.svg" alt="Cultivation Plan Icon"/>
@@ -35,7 +35,7 @@
 
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="spray.php" class="card-link">
+                            <a href="spray.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/spray-icon.svg" alt="Spray Icon"/>
@@ -108,7 +108,7 @@
 
                         <!-- Add New Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="add_new.php" class="card-link">
+                            <a href="add_new.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/add-new-icon.png" alt="Add New Icon"/>

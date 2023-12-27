@@ -21,7 +21,7 @@
     <link href="assets/css/demo.css" rel="alternate" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
-<!--    Script-->
+<!--    Scripts -->
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

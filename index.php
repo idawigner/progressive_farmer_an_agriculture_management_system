@@ -2,23 +2,23 @@
 <html lang="en">
 <?php include 'layouts/header.php'  ?>
 <body>
-<div class="wrapper">
+<div class="wrapper login-wrapper">
 
     <div class="content">
         <div class="login-form">
-            <div class="title"><span>Login Form</span></div>
-            <form action="login.php" method="post">
-                <div class="row">
-                    <i class="fas fa-user"></i>
+            <div class="title"><span>Login</span></div>
+            <form action="admin.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" method="post">
+                <div class="row d-flex justify-content-start">
+                    <i class="fas fa-envelope"></i>
                     <input type="email" name="email" placeholder="Email" required>
                 </div>
 
-                <div class="row">
+                <div class="row d-flex justify-content-start">
                     <i class="fas fa-lock"></i>
                     <input type="password" name="pass" placeholder="Password" required>
                 </div>
 
-                <div class="forgetpass"><a href="#">Forgot password?</a></div>
+                <div class="forgetpass d-flex justify-content-end"><a href="#">Forgot password?</a></div>
 
                 <div class="row button">
                     <input type="submit" name="login" value="Login">

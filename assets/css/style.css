@@ -37,7 +37,7 @@ a.card-link:active {
 .sidebar-nav-link img {
     width: 35px;
     height: 35px;
-    margin-right: 15px; /* Adjust the margin as needed */
+    margin-right: 3px;
 }
 
 .sidebar-nav-link p {
@@ -64,6 +64,10 @@ a.card-link:active {
     align-items: center;
 }
 
+.text-center {
+    margin-bottom: 15px;
+}
+
 /*Main Content Dashboard End*/
 
 /*Card CSS Start*/
@@ -74,7 +78,6 @@ a.card-link:active {
 
 .card {
     width: 100%;
-    height: 180px;
     margin-bottom: 10px;
     border: none;
     border-radius: 7px;
@@ -82,12 +85,34 @@ a.card-link:active {
     box-shadow: 5px 10px 20px rgba(75, 75, 75, 0.1);
 }
 
+/* Fixed height for desktop and tablet */
+@media (min-width: 730px) {
+    .card {
+        height: 180px;
+    }
+}
+
+/* Adaptive height for mobile */
+@media (max-width: 729px) {
+    .card {
+        height: auto;
+    }
+}
+
 .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 15px 0 !important;
+}
+
+.task-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    padding: 0 10px !important;
 }
 
 .card img {
@@ -97,6 +122,7 @@ a.card-link:active {
 }
 
 .card-title {
+    margin-top: 15px !important;
     font-weight: bold !important;
     color: #9DCD5A;
 }
@@ -114,14 +140,14 @@ a.card-link:active {
 /* Additional styles for smaller screens (tablets) */
 @media (min-width: 577px) and (max-width: 991px) {
     .card-container {
-        max-width: 300px; /* Adjust the margin as needed */
+        max-width: 350px; /* Adjust the margin as needed */
     }
 }
 
 /* Additional styles for even smaller screens (phones) */
 @media (max-width: 576px) {
     .card-container {
-        max-width: 300px; /* Adjust the margin as needed */
+        max-width: 350px; /* Adjust the margin as needed */
     }
 }
 /*Card CSS End*/
@@ -136,11 +162,37 @@ a.card-link:active {
 }
 /*Admin CSS End*/
 
+/*Land Tasks CSS Start*/
+.plan-task-tag {
+    display: inline-block;
+    align-items: center;
+    border-radius: 6px;
+    padding: 3px 10px 0;
+    margin-bottom: 15px !important;
+}
+/*Admin CSS End*/
+
 /*Cultivation Plan CSS Start*/
+.info-card-content {
+    /*margin: 10px;*/
+    padding: 20px 10px 20px 30px;
+    width: 80%;
+}
+
 .info-card-content p{
     color: #A6A6A6;
     font-size: 13px;
     margin-bottom: 5px;
+}
+
+.edit-icon {
+    width: 20%;
+    justify-self: end;
+}
+
+.edit-icon-img {
+    width: 60px;
+    height: 60px;
 }
 
 .date {
@@ -149,27 +201,80 @@ a.card-link:active {
     margin-bottom: 10px !important;
 }
 
-.edit-icon-img {
-    width: 60px;
-    height: 60px;
+.modal-content {
+    border: none;
+    border-radius: 7px;
+    box-shadow: 10px 10px 20px rgba(169, 169, 169, 0.5);
 }
+
+.modal-header {
+    background-color: #ffffff;
+    border-bottom: none;
+}
+
+.modal-title {
+    color: #9DCD5A;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
 /*Cultivation Plan CSS End*/
 
+/* New Record Button CSS Start */
+.new-record-button {
+    width: 175px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(169, 169, 169, 0.6);
+    background-color: #7D8CC4;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.new-record-button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.new-record-button-text {
+    font-size: 15px;
+    color: white;
+}
+/* New Record Button CSS End */
+
+
 /*Login CSS Start*/
-.login-form{
+.login-form {
+    width: 400px;
     max-width: 440px;
     padding: 0;
-    margin: 250px 10px;
+    /*margin: 250px 10px;*/
     background: #fff;
     border-radius: 5px;
     box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+
+}
+
+/* Additional styles for even smaller screens (phones) */
+@media (max-width: 576px) {
+    .login-form {
+        max-width: 350px; /* Adjust the margin as needed */
+    }
+}
+.login-wrapper {
+    display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #EAFAEB;
 }
-/*.wrapper{*/
-/*    height: 500px;*/
-/*    background-color: #EAFAEB;*/
-/*}*/
+
+
 .wrapper .title{
     height: 90px;
     background: #9DCD5A;
@@ -200,7 +305,7 @@ a.card-link:active {
     transition: all 0.3s ease;
 }
 form .row input:focus{
-    border-color: #7D8CC4;
+    border-color: #9DCD5A;
     box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
 }
 form .row input::placeholder{
@@ -210,10 +315,9 @@ form .row input::placeholder{
     position: absolute;
     width: 47px;
     height: 100%;
-    color: #fff;
+    color: #9DCD5A;
     font-size: 18px;
-    background: #9DCD5A;
-    border: 1px solid #9DCD5A;
+    background: transparent;
     border-radius: 5px 0 0 5px;
     display: flex;
     align-items: center;

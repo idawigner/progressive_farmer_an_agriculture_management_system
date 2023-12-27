@@ -17,7 +17,7 @@
 
 <!--                        Owned Plot Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plot.php" class="card-link">
+                            <a href="plot.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 1</h5>
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plot.php" class="card-link">
+                            <a href="plot.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 2</h5>
@@ -122,7 +122,7 @@
 
                         <div class="card-container col-lg-3 col-md-6">
                             <a href="plot.php" class="card-link">
-                                <div class="card">
+                                <div class="card"?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE>
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 7</h5>
                                         <p>
