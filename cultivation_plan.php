@@ -1,38 +1,8 @@
-<!--Save Record into Database-->
-<?php
-//Including header
-include 'layouts/header.php';
-include 'db_conn.php';
-
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
-    $taskType = $_POST['taskType'];
-    $date = $_POST['date'];
-    $crop = $_POST['crop'];
-    $estExpense = $_POST['estExpense'];
-
-    // Insert data into the database
-    $sql = "INSERT INTO cultivation_plan (taskType, date, crop, estExpense) VALUES ('$taskType', '$date', '$crop', $estExpense)";
-
-    if (mysqli_query($conn, $sql)) {
-        // Success
-        echo json_encode(array("status" => "success"));
-        exit; // Terminate the script after sending the response
-    } else {
-        // Error
-        echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
-        exit; // Terminate the script after sending the response
-    }
-}
-
-// Retrieve data from the database
-$sql = "SELECT * FROM cultivation_plan";
-$result = mysqli_query($conn, $sql);
-?>
-
-
+<!doctype html>
+<html lang="en">
+<?php include 'layouts/header.php'  ?>
 <body>
+
 <!-- Modal Container -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -96,7 +66,12 @@ $result = mysqli_query($conn, $sql);
                     </div>
                     <!-- Cards Container -->
                     <div class="row">
-
+                        <?php
+                        include 'db_conn.php';
+                        // Retrieve data from the database
+                        $sql = "SELECT * FROM cultivation_plan";
+                        $result = mysqli_query($conn, $sql);
+                        ?>
                         <!-- Cards Container -->
                         <div class="row">
                             <?php while ($card = mysqli_fetch_assoc($result)) : ?>
@@ -151,6 +126,7 @@ $result = mysqli_query($conn, $sql);
                             </button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -167,6 +143,7 @@ $result = mysqli_query($conn, $sql);
 </div>
 
 <script>
+    // Save Record Function
     function saveRecord() {
         // Validate the form
         if (validateForm()) {
@@ -185,15 +162,11 @@ $result = mysqli_query($conn, $sql);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'cultivation_plan.php', true);
+            xhr.open('POST', 'cultivation_plan_insert.php', true);
             xhr.onload = function () {
                 var response = JSON.parse(xhr.responseText);
                 if (response.status === 'success') {
-                    // Data successfully inserted, close the modal using Bootstrap modal method
                     $('#myModal').modal('hide');
-
-                    // Optionally, you can update the card dynamically or reload the page here
-                    // For simplicity, I'll reload the page to fetch the updated data
                     location.reload();
                 } else {
                     // Error handling
@@ -204,9 +177,8 @@ $result = mysqli_query($conn, $sql);
         }
     }
 
+    // Validate Form Function
     function validateForm() {
-        // You can implement your validation logic here
-        // For simplicity, I'm assuming all fields are required
         var isValid = true;
         var formElements = document.getElementById('newRecordForm').elements;
         for (var i = 0; i < formElements.length; i++) {

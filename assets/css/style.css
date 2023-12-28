@@ -90,6 +90,9 @@ a.card-link:active {
     .card {
         height: 180px;
     }
+    .spray-card {
+        height: 140px;
+    }
 }
 
 /* Adaptive height for mobile */
@@ -172,7 +175,7 @@ a.card-link:active {
 }
 /*Admin CSS End*/
 
-/*Cultivation Plan CSS Start*/
+/*Start Card CSS*/
 .info-card-content {
     /*margin: 10px;*/
     padding: 20px 10px 20px 30px;
@@ -220,7 +223,7 @@ a.card-link:active {
     padding: 20px;
 }
 
-/*Cultivation Plan CSS End*/
+/* End Card CSS*/
 
 /* New Record Button CSS Start */
 .new-record-button {
