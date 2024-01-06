@@ -73,7 +73,7 @@ a.card-link:active {
 /*Card CSS Start*/
 .card-container {
     width: 100%;
-    margin: 10px 0; /* Adjust the margin as needed */
+    margin: 10px 0;
 }
 
 .card {

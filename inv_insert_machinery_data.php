@@ -2,11 +2,12 @@
 include '../progressive_farmer/db_conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
-    $id = $_POST['id'];
+    $machinery_type = $_POST['machineryType'];
+    $available_units = $_POST['availableUnits'];
+    $cost = $_POST['cost'];
 
-    // Delete data from the 'spray' table
-    $sql = "DELETE FROM spray WHERE id='$id'";
+    // Insert data into the database
+    $sql = "INSERT INTO inv_machinery_stock (machinery_type, available_units, cost) VALUES ('$machinery_type', $available_units, $cost)";
 
     if (mysqli_query($conn, $sql)) {
         // Success

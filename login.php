@@ -7,7 +7,7 @@
     <div class="content">
         <div class="login-form">
             <div class="title"><span>Login</span></div>
-            <form action="admin.php?_ijt=rj0iq3rte0hc6t3nfah6c8ea7e&_ij_reload=RELOAD_ON_SAVE" method="post">
+            <form action="admin.php" method="post">
                 <div class="row d-flex justify-content-start">
                     <i class="fas fa-envelope"></i>
                     <input type="email" name="email" placeholder="Email" required>

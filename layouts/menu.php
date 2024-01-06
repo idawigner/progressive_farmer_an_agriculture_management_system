@@ -8,52 +8,50 @@
             <span class="navbar-toggler-bar burger-lines"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
-                        <i class="nc-icon nc-palette"></i>
-                        <span class="d-lg-none">Dashboard</span>
-                    </a>
-                </li>
-                <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="nc-icon nc-planet"></i>
-                        <span class="notification">5</span>
-                        <span class="d-lg-none">Notification</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Notification 1</a>
-                        <a class="dropdown-item" href="#">Notification 2</a>
-                        <a class="dropdown-item" href="#">Notification 3</a>
-                        <a class="dropdown-item" href="#">Notification 4</a>
-                        <a class="dropdown-item" href="#">Another notification</a>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nc-icon nc-zoom-split"></i>
-                        <span class="d-lg-block">&nbsp;Search</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mr-5">
-                <li class="nav-item dropdown">
-                    <a class="nav-link">
-                    </a>
-                    <img src="assets/img/idawigner.png" style="border-radius: 50%" width="50" height="50">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="no-icon">Admin</span>
-                    </a>
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-toggle="dropdown">
+                                    <i class="nc-icon nc-palette"></i>
+                                    <span class="d-lg-none">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="dropdown nav-item">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <i class="nc-icon nc-planet"></i>
+                                    <span class="notification">5</span>
+                                    <span class="d-lg-none">Notification</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Notification 1</a>
+                                    <a class="dropdown-item" href="#">Notification 2</a>
+                                    <a class="dropdown-item" href="#">Notification 3</a>
+                                    <a class="dropdown-item" href="#">Notification 4</a>
+                                    <a class="dropdown-item" href="#">Another notification</a>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nc-icon nc-zoom-split"></i>
+                                    <span class="d-lg-block">&nbsp;Search</span>
+                                </a>
+                            </li>
+                        </ul>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <ul class="navbar-nav mr-5">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="assets/img/logo.png" style="border-radius: 50%" width="50" height="50">
+                                    <span class="no-icon">Admin</span>
+                                </a>
 
-                        <a class="dropdown-item" href="#">Logout</a>
-                        <a class="dropdown-item" href="#">Change Password</a>
-                        <a class="dropdown-item" href="">setting</a>
-                        <a class="dropdown-item" href="">change profile_img</a>
-                    </div>
-                </li>
-            </ul>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="../login.php">Logout</a>
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                    <a class="dropdown-item" href="#">Setting</a>
+                                    <a class="dropdown-item" href="#">Change Profile Image</a>
+                                </div>
+                            </li>
+                        </ul>
         </div>
     </div>
 </nav>

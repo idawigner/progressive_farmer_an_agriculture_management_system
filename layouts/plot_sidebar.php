@@ -4,16 +4,23 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="admin.php" class="simple-text">
-                Progressive Farmer
+                Cultivation PLan
             </a>
         </div>
 
 
         <ul class="nav">
             <li class="nav-item active">
-                <a class="nav-link sidebar-nav-link" href="cultivation_plan.php">
-                    <img src = "assets/img/icons/cultivation-plan-icon.svg" alt="Cultivation Plan Icon"/>
-                    <p>Cultivation Plan</p>
+                <a class="nav-link sidebar-nav-link" href="javascript:history.go(-1)">
+                    <i class="fas fa-arrow-left"></i>
+                    <p>Back</p>
+                </a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link sidebar-nav-link" href="sowing.php">
+                    <img src = "assets/img/icons/cultivation-plan-icon.svg" alt="Sowing Icon"/>
+                    <p>Sowing</p>
                 </a>
             </li>
             <li class="nav-item active">
@@ -52,12 +59,12 @@
                     <p>Harvest</p>
                 </a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link sidebar-nav-link" href="add_new.php">
-                    <img src = "assets/img/icons/add-new-icon-white.svg" alt="Add New Icon"/>
-                    <p>Add New</p>
-                </a>
-            </li>
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link sidebar-nav-link" href="add_new.php">-->
+<!--                    <img src = "assets/img/icons/add-new-icon-white.svg" alt="Add New Icon"/>-->
+<!--                    <p>Add New</p>-->
+<!--                </a>-->
+<!--            </li>-->
 
         </ul>
     </div>

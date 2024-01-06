@@ -35,7 +35,7 @@
                         <label for="cost">Cost (Rs.):</label>
                         <input type="number" class="form-control" id="cost" name="cost" required>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="insertSprayRecord()">Save</button>
+                    <button type="button" class="btn btn-primary" onclick="createSprayRecord()">Save</button>
                 </form>
             </div>
         </div>
@@ -54,8 +54,9 @@
     while ($card = mysqli_fetch_assoc($result)) :
         ?>
         <!-- Edit Modal -->
+        <!-- Edit Modal -->
         <div class="modal fade edit-modal" id="editModal<?php echo $card['id']; ?>">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title">Edit Record</h3>
@@ -79,7 +80,7 @@
                                 <label for="editCost">Cost (Rs.):</label>
                                 <input type="number" class="form-control" id="editCost" name="editCost" value="<?php echo $card['cost']; ?>" required>
                             </div>
-                            <button type="button" class="btn btn-success" onclick="updateSprayRecord(<?php echo $card['id']; ?>)">Update</button>
+                            <button type="button" class="btn btn-success" onclick="updateSprayRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteSprayRecord(<?php echo $card['id']; ?>)">Delete</button>
                         </form>
                     </div>
@@ -103,7 +104,7 @@
                     <!-- Page Title -->
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3 style="color: #9DCD5A;">Spray Plan</h3>
+                            <h3 style="color: #9DCD5A;">Spray</h3>
                         </div>
                     </div>
                     <!-- Cards Container -->
@@ -169,38 +170,12 @@
     </div>
 </div>
 
+
 <script>
-    //Displaying Edit-Modal Above Backdrop in Tab and Mobile
-    document.addEventListener('DOMContentLoaded', function () {
-        if (window.innerWidth <= 991) {
-            // On smaller screens, append the modal to the body
-            var modalContainer = document.querySelector('.edit-modals-container');
-            var modals = modalContainer.querySelectorAll('.edit-modal');
-
-            modals.forEach(function (modal) {
-                document.body.appendChild(modal);
-            });
-        }
-    });
-
-    // Validate Form Function for Spray
-    function validateSprayForm(formId) {
-        var isValid = true;
-        var formElements = document.getElementById(formId).elements;
-        for (var i = 0; i < formElements.length; i++) {
-            if (formElements[i].type !== 'button' && formElements[i].value.trim() === '') {
-                isValid = false;
-                alert('Please fill in all fields.');
-                break;
-            }
-        }
-        return isValid;
-    }
-
-    // Insert Record Function for Spray
-    function insertSprayRecord() {
+    // Create Record Function for Spray
+    function createSprayRecord() {
         // Validate the form
-        if (validateSprayForm()) {
+        if (validateSprayForm('newSprayRecordForm')) {
             // Get form values
             var date = document.getElementById('sprayDate').value;
             var medicine = document.getElementById('medicine').value;
@@ -216,7 +191,7 @@
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'spray_insert.php', true);
+            xhr.open('POST', 'spray_create.php', true);
             xhr.onload = function () {
                 var response = JSON.parse(xhr.responseText);
                 if (response.status === 'success') {
@@ -232,40 +207,41 @@
     }
 
     // Update Record Function for Spray
-    function updateSprayRecord(id) {
-    // Validate the form
-    var formId = 'editSprayRecordForm' + id;
-    if (validateSprayForm(formId)) {
-    // Get form values
-    var date = document.getElementById('editSprayDate').value;
-    var medicine = document.getElementById('editMedicine').value;
-    var amount = document.getElementById('editAmount').value;
-    var cost = document.getElementById('editCost').value;
+    function updateSprayRecord(id, modalId) {
+        // Validate the form
+        var formId = 'editSprayRecordForm' + id;
+        if (validateSprayForm(formId)) {
+            // Get form values using the dynamic formId
+            var date = document.getElementById(modalId).querySelector('#editSprayDate').value;
+            var medicine = document.getElementById(modalId).querySelector('#editMedicine').value;
+            var amount = document.getElementById(modalId).querySelector('#editAmount').value;
+            var cost = document.getElementById(modalId).querySelector('#editCost').value;
 
-    // Create FormData object
-    var formData = new FormData();
-    formData.append('id', id);
-    formData.append('date', date);
-    formData.append('medicine', medicine);
-    formData.append('amount', amount);
-    formData.append('cost', cost);
+            // Create FormData object
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('date', date);
+            formData.append('medicine', medicine);
+            formData.append('amount', amount);
+            formData.append('cost', cost);
 
-    // Make an AJAX request to handle form submission
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'spray_update.php', true);
-    xhr.onload = function () {
-    var response = JSON.parse(xhr.responseText);
-    if (response.status === 'success') {
-    $('#editModal' + id).modal('hide');
-    location.reload();
-} else {
-    // Error handling
-    alert('Error: ' + response.message);
-}
-};
-    xhr.send(formData);
-}
-}
+            // Make an AJAX request to handle form submission
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'spray_update.php', true);
+            xhr.onload = function () {
+                var response = JSON.parse(xhr.responseText);
+                if (response.status === 'success') {
+                    // Use the original ID here
+                    $('#' + modalId).modal('hide');
+                    location.reload();
+                } else {
+                    // Error handling
+                    alert('Error: ' + response.message);
+                }
+            };
+            xhr.send(formData);
+        }
+    }
 
     // Delete Record Function for Spray
     function deleteSprayRecord(id) {
@@ -288,6 +264,33 @@
     xhr.send('id=' + id);
 }
 }
+
+    // Validate Form Function for Spray
+    function validateSprayForm(formId) {
+        var isValid = true;
+        var formElements = document.getElementById(formId).elements;
+        for (var i = 0; i < formElements.length; i++) {
+            if (formElements[i].type !== 'button' && formElements[i].value.trim() === '') {
+                isValid = false;
+                alert('Please fill in all fields.');
+                break;
+            }
+        }
+        return isValid;
+    }
+
+    //Displaying Edit-Modal Above Backdrop in Tab and Mobile
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.innerWidth <= 991) {
+            // On smaller screens, append the modal to the body
+            var modalContainer = document.querySelector('.edit-modals-container');
+            var modals = modalContainer.querySelectorAll('.edit-modal');
+
+            modals.forEach(function (modal) {
+                document.body.appendChild(modal);
+            });
+        }
+    });
 
 </script>
 

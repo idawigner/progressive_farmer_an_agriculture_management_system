@@ -1,5 +1,5 @@
 <?php
-include 'db_conn.php';
+include '../progressive_farmer/db_conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $sql)) {
         // Success
-        echo json_encode(array("status" => "success"));
+        echo json_encode(array("status" => "success", "id" => $id));
+        exit(); // Add this line
     } else {
         // Error
         echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
