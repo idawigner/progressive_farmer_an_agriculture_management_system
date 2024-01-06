@@ -112,7 +112,7 @@
                                 <div class="card labour-card">
                                     <div class="card-body task-card-body">
                                         <div class="row">
-                                            <div class="col-lg-9 col-md-9 col-sm-9 info-card-content">
+                                            <div class="col-lg-9 col-md-9 col-sm-9 info-card-content scrollable-info-card-content-labour">
                                                 <?php
                                                 // Display card information
                                                 echo '<p><strong>Name:</strong> ' . $card['name'] . '</p>';

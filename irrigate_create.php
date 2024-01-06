@@ -6,9 +6,10 @@ include '../progressive_farmer/db_conn.php';
 $date = $_POST['date'];
 $source = isset($_POST['source']) ? $_POST['source'] : null; // Handle null for 'N/A'
 $status = $_POST['status'];
+$irrigate_time = $_POST['irrigate_time']; // Get irrigate_time
 
 // SQL query to insert data into the 'irrigate' table
-$sql = "INSERT INTO irrigate (date, source, status) VALUES ('$date', '$source', '$status')";
+$sql = "INSERT INTO irrigate (date, source, status, irrigate_time) VALUES ('$date', '$source', '$status', '$irrigate_time')";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

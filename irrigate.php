@@ -35,6 +35,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="irrigateTime">Time:</label>
+                        <input type="text" class="form-control" id="irrigateTime" name="irrigateTime">
+                    </div>
+                    <div class="form-group">
                         <label for="irrigateStatus">Status:</label>
                         <select class="form-control" id="irrigateStatus" name="irrigateStatus" required disabled>
                             <option value="Pending" style="color: grey;" selected>Pending</option>
@@ -86,6 +90,10 @@
                                     <option value="Diesel" <?php echo ($card['source'] === 'Diesel') ? 'selected' : ''; ?>>Diesel</option>
                                     <option value="Canal Water" <?php echo ($card['source'] === 'Canal Water') ? 'selected' : ''; ?>>Canal Water</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="editIrrigateTime">Time:</label>
+                                <input type="text" class="form-control" id="editIrrigateTime" name="editIrrigateTime" value="<?php echo $card['irrigate_time']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="editIrrigateStatus">Status:</label>
@@ -141,7 +149,7 @@
                                                 // Display other card information
                                                 echo '<h6 class="date">' . $card['date'] . '</h6>';
                                                 echo '<p><strong>Source:</strong> ' . ($card['source'] ? $card['source'] : 'N/A') . '</p>';
-
+                                                echo '<p><strong>Time:</strong> ' . $card['irrigate_time'] . '</p>';
                                                 // Display status tag with border
                                                 $statusColor = ($card['status'] == 'Pending') ? 'red' : '#9DCD5A';
                                                 echo '<p class="plan-task-tag" style="color: ' . $statusColor . '; border: 2px solid ' . $statusColor . ';">' . $card['status'] . '</p>';
@@ -190,14 +198,16 @@
         if (validateIrrigateForm('newIrrigateRecordForm')) {
             // Get form values
             var date = document.getElementById('irrigateDate').value;
-            var source = 'N/A';  // Default value for new records
-            var status = 'Pending';  // Set default status to 'Pending'
+            var source = 'N/A';
+            var status = 'Pending';
+            var irrigate_time = document.getElementById('irrigateTime').value; // Get irrigate_time
 
             // Create FormData object
             var formData = new FormData();
             formData.append('date', date);
             formData.append('source', source);
             formData.append('status', status);
+            formData.append('irrigate_time', irrigate_time); // Add irrigate_time
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -225,6 +235,7 @@
             var date = document.getElementById(modalId).querySelector('#editIrrigateDate').value;
             var source = document.getElementById(modalId).querySelector('#editIrrigateSource').value;
             var status = document.getElementById(modalId).querySelector('#editIrrigateStatus').value;
+            var irrigate_time = document.getElementById(modalId).querySelector('#editIrrigateTime').value; // Get irrigate_time
 
             // Create FormData object
             var formData = new FormData();
@@ -232,6 +243,7 @@
             formData.append('date', date);
             formData.append('source', source);
             formData.append('status', status);
+            formData.append('irrigate_time', irrigate_time); // Add irrigate_time
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
