@@ -93,6 +93,9 @@ a.card-link:active {
     .spray-card {
         height: 140px;
     }
+    .irrigate-card {
+        height: 120px;
+    }
 }
 
 /* Adaptive height for mobile */
