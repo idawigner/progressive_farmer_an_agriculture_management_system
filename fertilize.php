@@ -139,20 +139,20 @@
                                         <div class="row">
                                             <div class="col-lg-9 col-md-9 col-sm-9 info-card-content">
                                                 <?php
+                                                // Display status tag with border
+                                                $statusColor = ($card['status'] == 'Pending') ? 'red' : '#9DCD5A';
+                                                echo '<p class="plan-task-tag" style="color: ' . $statusColor . '; border: 2px solid ' . $statusColor . ';">' . $card['status'] . '</p>';
+
                                                 // Display other card information
                                                 echo '<h6 class="date">' . $card['date'] . '</h6>';
                                                 echo '<p><strong>Name:</strong> ' . $card['name'] . '</p>';
                                                 echo '<p><strong>Quantity:</strong> ' . $card['quantity'] . ' Bags</p>';
                                                 echo '<p><strong>Company Name:</strong> ' . ($card['company_name'] ? $card['company_name'] : 'N/A') . '</p>';
-
-                                                // Display status tag with border
-                                                $statusColor = ($card['status'] == 'Pending') ? 'red' : '#9DCD5A';
-                                                echo '<p class="plan-task-tag" style="color: ' . $statusColor . '; border: 2px solid ' . $statusColor . ';">' . $card['status'] . '</p>';
                                                 ?>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-3 text-center edit-icon">
                                                 <a href="#" data-toggle="modal" data-target="#editModal<?php echo $card['id']; ?>">
-                                                    <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
+                                                    <img src="assets/img/icons/edit-icon.png" alt="Edit Icon" class="edit-icon-img">
                                                 </a>
                                             </div>
                                         </div>

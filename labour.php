@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-3 text-center edit-icon">
                                                 <a href="#" data-toggle="modal" data-target="#editModal<?php echo $card['id']; ?>">
-                                                    <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
+                                                    <img src="assets/img/icons/edit-icon.png" alt="Edit Icon" class="edit-icon-img">
                                                 </a>
                                             </div>
                                         </div>

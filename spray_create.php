@@ -1,26 +1,28 @@
 <?php
+// Include database connection
 include '../progressive_farmer/db_conn.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
-    $date = $_POST['date'];
-    $medicine = $_POST['medicine'];
-    $amount = $_POST['amount'];
-    $cost = $_POST['cost'];
+// Get form data using POST method
+$date = $_POST['date'];
+$medicine = $_POST['medicine'];
+$quantity = $_POST['quantity'];
+$details = isset($_POST['details']) ? $_POST['details'] : null;
+$status = $_POST['status'];
 
-    // Insert data into the 'spray' table
-    $sql = "INSERT INTO spray (date, medicine, amount, cost) VALUES ('$date', '$medicine', '$amount', '$cost')";
+// SQL query to insert data into the 'spray' table
+$sql = "INSERT INTO spray (date, medicine, quantity, details, status) VALUES ('$date', '$medicine', '$quantity', '$details', '$status')";
 
-    if (mysqli_query($conn, $sql)) {
-        // Success
-        echo json_encode(array("status" => "success"));
-        exit(); // Add this line
-    } else {
-        // Error
-        echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
-    }
-
-    // Close the database connection
-    mysqli_close($conn);
-    exit();
+// Check if the query is successful
+if (mysqli_query($conn, $sql)) {
+    // Return success status and message
+    $response = array('status' => 'success', 'message' => 'Spray record added successfully.');
+} else {
+    // Return error status and message
+    $response = array('status' => 'error', 'message' => 'Error adding spray record: ' . mysqli_error($conn));
 }
+
+// Close the database connection
+mysqli_close($conn);
+
+// Return JSON response
+echo json_encode($response);

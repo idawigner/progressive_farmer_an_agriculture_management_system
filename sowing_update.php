@@ -7,10 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = mysqli_real_escape_string($conn, $_POST['date']);
     $seed = mysqli_real_escape_string($conn, $_POST['seed']);
     $seedCompany = mysqli_real_escape_string($conn, $_POST['seedCompany']);
+    $details = isset($_POST['details']) ? $_POST['details'] : null;
     $status = mysqli_real_escape_string($conn, $_POST['status']);
 
     // Update data in the 'sowing' table
-    $sql = "UPDATE sowing SET date='$date', seed='$seed', seed_company='$seedCompany', status='$status' WHERE id = $id";
+    $sql = "UPDATE sowing SET date='$date', seed='$seed', seed_company='$seedCompany', details='$details', status='$status' WHERE id = $id";
 
     if (mysqli_query($conn, $sql)) {
         // Success

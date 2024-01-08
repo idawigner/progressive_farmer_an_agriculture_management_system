@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="en">
-<?php include 'layouts/header.php'  ?>
+<?php include '../progressive_farmer/layouts/header.php'  ?>
 <body>
 <div class="wrapper">
 
 
-    <?php include 'layouts/main_sidebar.php' ?>
+    <?php include '../progressive_farmer/layouts/main_sidebar.php' ?>
     <div class="main-panel">
 
-        <?php include 'layouts/menu.php' ?>
+        <?php include '../progressive_farmer/layouts/menu.php' ?>
         <!-- End Navbar -->
         <div class="content">
             <div class="dashboard-area">
                 <div class="container-fluid">
                     <div class="row">
 
-                        <!-- Visit Dairy Card -->
+                        <!-- Visit Dairy Website -->
                         <div class="card-container col-lg-3 col-md-6">
                             <a href="https://alrizadairies.com/" class="card-link" target="_blank">
                                 <div class="card">
@@ -27,13 +27,13 @@
                             </a>
                         </div>
 
-                        <!-- Land Card -->
+                        <!-- Plots Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="land.php" class="card-link">
+                            <a href="plots.php" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/land-icon.svg" alt="Land Icon"/>
-                                        <h5 class="card-title" style="color: #22B2BB">Land</h5>
+                                        <h5 class="card-title" style="color: #22B2BB">Plots</h5>
                                     </div>
                                 </div>
                             </a>
@@ -67,15 +67,8 @@
             </div>
         </div>
 
-
-
-
-
-
-        <?php include 'layouts/Footer.php' ?>
-
+        <?php include '../progressive_farmer/layouts/Footer.php' ?>
     </div>
-
 </div>
 
 

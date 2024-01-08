@@ -80,41 +80,6 @@ a.card-link:active {
     margin: 10px 0;
 }
 
-.card {
-    width: 100%;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 7px;
-    background-color: #ffffff;
-    box-shadow: 5px 10px 20px rgba(75, 75, 75, 0.1);
-}
-
-/* Fixed height for desktop and tablet */
-@media (min-width: 730px) {
-    .card {
-        height: 180px;
-    }
-    .spray-card {
-        height: 140px;
-    }
-    .irrigate-card {
-        height: 140px;
-    }
-    .labour-card {
-        height: 120px;
-    }
-    .harvest-card {
-        height: 160px;
-    }
-}
-
-/* Adaptive height for mobile */
-@media (max-width: 729px) {
-    .card {
-        height: auto;
-    }
-}
-
 .card-body {
     display: flex;
     flex-direction: column;
@@ -153,6 +118,41 @@ a.card-link:active {
     margin-right: 5px;
 }
 
+.card {
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 20px rgba(75, 75, 75, 0.1);
+}
+
+/* Fixed height for desktop and tablet */
+@media (min-width: 730px) {
+    .card {
+        height: 180px;
+    }
+    .sowing-card {
+        height: 160px;
+    }
+    .irrigate-card {
+        height: 140px;
+    }
+    .labour-card {
+        height: 120px;
+    }
+    .harvest-card {
+        height: 160px;
+    }
+}
+
+/* Adaptive height for mobile */
+@media (max-width: 729px) {
+    .card {
+        height: auto;
+    }
+}
+
 /* Additional styles for smaller screens (tablets) */
 @media (min-width: 577px) and (max-width: 991px) {
     .card-container {
@@ -166,6 +166,72 @@ a.card-link:active {
         max-width: 350px; /* Adjust the margin as needed */
     }
 }
+
+.info-card-content {
+    padding: 20px 10px 20px 30px;
+    width: 80%;
+}
+
+.scrollable-info-card-content-sowing,
+.scrollable-info-card-content-spray,
+.scrollable-info-card-content-expense,
+.scrollable-info-card-content-labour,
+.scrollable-info-card-content-harvest {
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox */
+}
+
+.scrollable-info-card-content-sowing,
+.scrollable-info-card-content-spray,
+.scrollable-info-card-content-expense,
+.scrollable-info-card-content-harvest {
+    max-height: 157px;
+}
+
+.scrollable-info-card-content-labour {
+    max-height: 117px;
+}
+
+/* Hide scrollbar for Webkit/Blink browsers (Chrome, Safari, Opera) */
+.scrollable-info-card-content-sowing::-webkit-scrollbar,
+.scrollable-info-card-content-spray::-webkit-scrollbar,
+.scrollable-info-card-content-expense::-webkit-scrollbar,
+.scrollable-info-card-content-labour::-webkit-scrollbar,
+.scrollable-info-card-content-harvest::-webkit-scrollbar {
+    width: 0;
+}
+
+.scrollable-info-card-content-sowing::-webkit-scrollbar-thumb,
+.scrollable-info-card-content-spray::-webkit-scrollbar-thumb,
+.scrollable-info-card-content-expense::-webkit-scrollbar-thumb,
+.scrollable-info-card-content-labour::-webkit-scrollbar-thumb,
+.scrollable-info-card-content-harvest::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.edit-icon {
+    width: 20%;
+    justify-self: end;
+}
+
+.edit-icon-img {
+    width: 18px;
+    height: 18px;
+}
+
+.info-card-content p{
+    color: #A6A6A6;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.date {
+    color: #9DCD5A;
+    font-size: 15px !important;
+    margin-bottom: 10px !important;
+}
+
 /*Card CSS End*/
 
 /*Admin CSS Start*/
@@ -188,59 +254,7 @@ a.card-link:active {
 }
 /*Admin CSS End*/
 
-/*Start Card CSS*/
-.info-card-content {
-    padding: 20px 10px 20px 30px;
-    width: 80%;
-}
-.scrollable-info-card-content-labour,
-.scrollable-info-card-content-harvest {
-    overflow-y: auto;
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: transparent transparent; /* Firefox */
-}
-
-.scrollable-info-card-content-labour {
-    max-height: 117px;
-}
-
-.scrollable-info-card-content-harvest {
-    max-height: 157px; /* Updated max-height for harvest content */
-}
-
-/* Hide scrollbar for Webkit/Blink browsers (Chrome, Safari, Opera) */
-.scrollable-info-card-content-labour::-webkit-scrollbar,
-.scrollable-info-card-content-harvest::-webkit-scrollbar {
-    width: 0;
-}
-
-.scrollable-info-card-content-labour::-webkit-scrollbar-thumb,
-.scrollable-info-card-content-harvest::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
-
-.edit-icon {
-    width: 20%;
-    justify-self: end;
-}
-
-.edit-icon-img {
-    width: 60px;
-    height: 60px;
-}
-
-.info-card-content p{
-    color: #A6A6A6;
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.date {
-    color: #9DCD5A;
-    font-size: 15px !important;
-    margin-bottom: 10px !important;
-}
-
+/*Start Modal CSS*/
 .modal-content {
     border: none;
     border-radius: 7px;
@@ -260,7 +274,7 @@ a.card-link:active {
     padding: 20px;
 }
 
-/* End Card CSS*/
+/* End Modal CSS*/
 
 /* New Record Button CSS Start */
 .new-record-button {

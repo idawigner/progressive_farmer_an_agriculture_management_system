@@ -2,18 +2,17 @@
 
 <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
     <div class="sidebar-wrapper">
-        <div class="logo">
-            <a href="admin.php" class="simple-text">
-                Cultivation PLan
+        <<div class="logo">
+            <a href="dashboard.php" class="simple-text">
+                Progressive Farmer
             </a>
         </div>
 
-
         <ul class="nav">
             <li class="nav-item active">
-                <a class="nav-link sidebar-nav-link" href="javascript:history.go(-1)">
-                    <i class="fas fa-arrow-left"></i>
-                    <p>Back</p>
+                <a class="nav-link sidebar-nav-link" href="plots.php">
+                    <img src = "assets/img/icons/land-icon.svg" alt="Land Icon"/>
+                    <p>Plots</p>
                 </a>
             </li>
 

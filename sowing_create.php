@@ -6,10 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = mysqli_real_escape_string($conn, $_POST['date']);
     $seed = mysqli_real_escape_string($conn, $_POST['seed']);
     $seedCompany = mysqli_real_escape_string($conn, $_POST['seedCompany']);
+    $details = isset($_POST['details']) ? $_POST['details'] : null;
     $status = 'Pending';  // Set default status to 'Pending'
 
     // Insert data into the 'sowing' table
-    $sql = "INSERT INTO sowing (date, seed, seed_company, status) VALUES ('$date', '$seed', '$seedCompany', '$status')";
+    $sql = "INSERT INTO sowing (date, seed, seed_company, details, status) VALUES ('$date', '$seed', '$seedCompany', '$details', '$status')";
 
     if (mysqli_query($conn, $sql)) {
         // Success

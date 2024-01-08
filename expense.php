@@ -31,7 +31,10 @@
                         <label for="expenseCost">Cost (in Rs.):</label>
                         <input type="number" class="form-control" id="expenseCost" name="expenseCost" required>
                     </div>
-
+                    <div class="form-group">
+                        <label for="details">Details:</label>
+                        <textarea class="form-control" id="details" name="details" placeholder="Optional"></textarea>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="createExpenseRecord()">Save</button>
                 </form>
             </div>
@@ -74,7 +77,10 @@
                                 <label for="editExpenseCost">Cost (in Rs.):</label>
                                 <input type="number" class="form-control" id="editExpenseCost" name="editExpenseCost" value="<?php echo $card['cost']; ?>" required>
                             </div>
-
+                            <div class="form-group">
+                                <label for="editDetails">Details:</label>
+                                <textarea class="form-control" id="editDetails" name="editDetails"><?php echo $card['details']; ?></textarea>
+                            </div>
                             <button type="button" class="btn btn-success" onclick="updateExpenseRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteExpenseRecord(<?php echo $card['id']; ?>)">Delete</button>
                         </form>
@@ -114,17 +120,21 @@
                                 <div class="card expense-card">
                                     <div class="card-body task-card-body">
                                         <div class="row">
-                                            <div class="col-lg-9 col-md-9 col-sm-9 info-card-content">
+                                            <div class="col-lg-9 col-md-9 col-sm-9 info-card-content scrollable-info-card-content-expense">
                                                 <?php
                                                 // Display other card information
                                                 echo '<h6 class="date">' . $card['date'] . '</h6>';
                                                 echo '<p><strong>Type:</strong> ' . $card['type'] . '</p>';
                                                 echo '<p><strong>Cost:</strong> Rs. ' . number_format($card['cost'], 0) . '</p>';
+                                                if (!empty($card['details'])) {
+                                                    echo '<p><strong>Details:</strong> ' . $card['details'] . '</p>';
+                                                }
+
                                                 ?>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-sm-3 text-center edit-icon">
                                                 <a href="#" data-toggle="modal" data-target="#editModal<?php echo $card['id']; ?>">
-                                                    <img src="assets/img/icons/edit-pencil-icon.svg" alt="Edit Icon" class="edit-icon-img">
+                                                    <img src="assets/img/icons/edit-icon.png" alt="Edit Icon" class="edit-icon-img">
                                                 </a>
                                             </div>
                                         </div>
@@ -167,12 +177,14 @@
             var date = document.getElementById('expenseDate').value;
             var type = document.getElementById('expenseType').value;
             var cost = document.getElementById('expenseCost').value;
+            var details = document.getElementById('details').value;
 
             // Create FormData object
             var formData = new FormData();
             formData.append('date', date);
             formData.append('type', type);
             formData.append('cost', cost);
+            formData.append('details', details);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -200,6 +212,7 @@
             var date = document.getElementById(modalId).querySelector('#editExpenseDate').value;
             var type = document.getElementById(modalId).querySelector('#editExpenseType').value;
             var cost = document.getElementById(modalId).querySelector('#editExpenseCost').value;
+            var details = document.getElementById(modalId).querySelector('#editDetails').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -207,6 +220,7 @@
             formData.append('date', date);
             formData.append('type', type);
             formData.append('cost', cost);
+            formData.append('details', details);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -252,15 +266,24 @@
         var isValid = true;
         var formElements = document.getElementById(formId).elements;
 
-        for (var i = 0; i < formElements.length; i++) {
-            // Check if any field is empty
-            if (formElements[i].type !== 'button' && formElements[i].value.trim() === '') {
-                isValid = false;
-                alert('Please fill in all fields.');
-                break;
-            }
-        }
+        // Check if the form is the new record form (not an edit modal)
+        var isNewRecordForm = formElements[0].name === 'expenseDate';
 
+            for (var i = 0; i < formElements.length; i++) {
+                // Check if any field except Details is empty in new record
+                if (isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'details' && formElements[i].value.trim() === '') {
+                    isValid = false;
+                    alert('Please fill in all fields.');
+                    break;
+                }
+
+                // Check if any required field except company name is empty in edit mode
+                if (!isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'editDetails' && formElements[i].value.trim() === '') {
+                    isValid = false;
+                    alert('Please fill in all fields.');
+                    break;
+                }
+            }
         return isValid;
     }
 

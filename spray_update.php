@@ -1,26 +1,29 @@
 <?php
+// Include database connection
 include '../progressive_farmer/db_conn.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
-    $id = $_POST['id'];
-    $date = $_POST['date'];
-    $medicine = $_POST['medicine'];
-    $amount = $_POST['amount'];
-    $cost = $_POST['cost'];
+// Get form data using POST method
+$id = $_POST['id'];
+$date = $_POST['date'];
+$medicine = $_POST['medicine'];
+$quantity = $_POST['quantity'];
+$details = isset($_POST['details']) ? $_POST['details'] : null;
+$status = $_POST['status'];
 
-    // Update data in the 'spray' table
-    $sql = "UPDATE spray SET date='$date', medicine='$medicine', amount='$amount', cost='$cost' WHERE id='$id'";
+// SQL query to update data in the 'spray' table
+$sql = "UPDATE spray SET date = '$date', medicine = '$medicine', quantity = '$quantity', details = '$details', status = '$status' WHERE id = $id";
 
-    if (mysqli_query($conn, $sql)) {
-        // Success
-        echo json_encode(array("status" => "success", "id" => $id));
-        exit(); // Add this line
-    } else {
-        // Error
-        echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
-    }
-
-    // Close the database connection
-    mysqli_close($conn);
+// Check if the query is successful
+if (mysqli_query($conn, $sql)) {
+    // Return success status and message
+    $response = array('status' => 'success', 'message' => 'Spray record updated successfully.');
+} else {
+    // Return error status and message
+    $response = array('status' => 'error', 'message' => 'Error updating spray record: ' . mysqli_error($conn));
 }
+
+// Close the database connection
+mysqli_close($conn);
+
+// Return JSON response
+echo json_encode($response);

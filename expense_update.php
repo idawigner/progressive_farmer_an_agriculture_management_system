@@ -7,9 +7,10 @@ $id = $_POST['id'];
 $date = $_POST['date'];
 $type = $_POST['type'];
 $cost = $_POST['cost'];
+$details = isset($_POST['details']) ? $_POST['details'] : null;
 
 // SQL query to update data in the 'expense' table
-$sql = "UPDATE expense SET date = '$date', type = '$type', cost = '$cost' WHERE id = '$id'";
+$sql = "UPDATE expense SET date = '$date', type = '$type', cost = '$cost', details = '$details' WHERE id = '$id'";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {
