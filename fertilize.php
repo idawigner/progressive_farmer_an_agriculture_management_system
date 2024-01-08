@@ -96,7 +96,6 @@
                                     <option value="Done" <?php echo ($card['status'] === 'Done') ? 'selected' : ''; ?>>Done</option>
                                 </select>
                             </div>
-                            <!-- Add your code above this line -->
 
                             <button type="button" class="btn btn-success" onclick="updateFertilizeRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteFertilizeRecord(<?php echo $card['id']; ?>)">Delete</button>

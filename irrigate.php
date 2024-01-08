@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="irrigateTime">Time:</label>
+                        <label for="irrigateTime">Times:</label>
                         <input type="text" class="form-control" id="irrigateTime" name="irrigateTime">
                     </div>
                     <div class="form-group">
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="editIrrigateTime">Time:</label>
+                                <label for="editIrrigateTime">Times:</label>
                                 <input type="text" class="form-control" id="editIrrigateTime" name="editIrrigateTime" value="<?php echo $card['irrigate_time']; ?>">
                             </div>
                             <div class="form-group">

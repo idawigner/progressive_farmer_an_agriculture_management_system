@@ -85,8 +85,8 @@
                                 <input type="text" class="form-control" id="editSprayQuantity" name="editSprayQuantity" value="<?php echo $card['quantity']; ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="editSprayDetails">Details:</label>
-                                <textarea class="form-control" id="editSprayDetails" name="editSprayDetails"><?php echo $card['details']; ?></textarea>
+                                <label for="editDetails">Details:</label>
+                                <textarea class="form-control" id="editDetails" name="editDetails"><?php echo $card['details']; ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="editSprayStatus">Status:</label>
@@ -232,7 +232,7 @@
             var date = document.getElementById(modalId).querySelector('#editSprayDate').value;
             var medicine = document.getElementById(modalId).querySelector('#editSprayMedicine').value;
             var quantity = document.getElementById(modalId).querySelector('#editSprayQuantity').value;
-            var details = document.getElementById(modalId).querySelector('#editSprayDetails').value;
+            var details = document.getElementById(modalId).querySelector('#editDetails').value;
             var status = document.getElementById(modalId).querySelector('#editSprayStatus').value;
 
             // Create FormData object
@@ -299,7 +299,7 @@
             }
 
             // Check if any required field except company name is empty in edit mode
-            if (!isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'editSprayDetails' && formElements[i].value.trim() === '') {
+            if (!isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'editDetails' && formElements[i].value.trim() === '') {
                 isValid = false;
                 alert('Please fill in all fields.');
                 break;

@@ -70,8 +70,8 @@
                                 <input type="text" class="form-control" id="editLabourDesignation" name="editLabourDesignation" value="<?php echo $card['designation']; ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="editLabourDetails">Details:</label>
-                                <textarea class="form-control" id="editLabourDetails" name="editLabourDetails"><?php echo $card['details']; ?></textarea>
+                                <label for="editDetails">Details:</label>
+                                <textarea class="form-control" id="editDetails" name="editDetails"><?php echo $card['details']; ?></textarea>
                             </div>
 
                             <button type="button" class="btn btn-success" onclick="updateLabourRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
@@ -200,7 +200,7 @@
             // Get form values using the dynamic formId
             var name = document.getElementById(modalId).querySelector('#editLabourName').value;
             var designation = document.getElementById(modalId).querySelector('#editLabourDesignation').value;
-            var details = document.getElementById(modalId).querySelector('#editLabourDetails').value;
+            var details = document.getElementById(modalId).querySelector('#editDetails').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -265,7 +265,7 @@
             }
 
             // Check if any required field except company name is empty in edit mode
-            if (!isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'editLabourDetails' && formElements[i].value.trim() === '') {
+            if (!isNewRecordForm && formElements[i].type !== 'button' && formElements[i].name !== 'editDetails' && formElements[i].value.trim() === '') {
                 isValid = false;
                 alert('Please fill in all fields.');
                 break;

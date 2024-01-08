@@ -87,7 +87,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="editDetails">Details:</label>
-                                <textarea class="form-control" id="editDetails" name="editDetails" placeholder="Optional"></textarea>
+                                <textarea class="form-control" id="editDetails" name="editDetails" placeholder="Optional"><?php echo $card['details']; ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="editStatus">Status:</label>
