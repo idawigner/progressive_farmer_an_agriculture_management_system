@@ -33,7 +33,6 @@
                                 </a>
                             </div>
 
-
                             <div class="card-container col-lg-3 col-md-6">
                                 <a href="spray.php" class="card-link">
                                     <div class="card">
@@ -107,16 +106,16 @@
 
 
                             <!-- Add New Card -->
-                            <div class="card-container col-lg-3 col-md-6">
-                                <a href="add_new.php" class="card-link">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <img src = "assets/img/icons/add-new-icon.png" alt="Add New Icon"/>
-                                            <h5 class="card-title" style="color: #9DCD5A">Add New</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+<!--                            <div class="card-container col-lg-3 col-md-6">-->
+<!--                                <a href="add_new.php" class="card-link">-->
+<!--                                    <div class="card">-->
+<!--                                        <div class="card-body text-center">-->
+<!--                                            <img src = "assets/img/icons/add-new-icon.png" alt="Add New Icon"/>-->
+<!--                                            <h5 class="card-title" style="color: #9DCD5A">Add New</h5>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                            </div>-->
 
 
 

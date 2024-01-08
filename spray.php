@@ -109,15 +109,13 @@
                     </div>
                     <!-- Cards Container -->
                     <div class="row">
+                        <!-- Displaying cards-->
                         <?php
                         include 'db_conn.php';
                         // Retrieve data from the 'spray' table
                         $sql = "SELECT * FROM spray";
                         $result = mysqli_query($conn, $sql);
                         ?>
-                        <!-- Cards Container -->
-                        <div class="row">
-<!--                            Displaying cards-->
                             <?php while ($card = mysqli_fetch_assoc($result)) : ?>
                                 <div class="card-container col-lg-4 col-md-6 col-sm-12">
                                     <div class="card spray-card">
