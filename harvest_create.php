@@ -7,9 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $time = mysqli_real_escape_string($conn, $_POST['time']);
     $details = mysqli_real_escape_string($conn, $_POST['details']);
     $status = 'Pending';  // Set default status to 'Pending'
+    $plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
     // Insert data into the 'harvest' table
-    $sql = "INSERT INTO harvest (date, time, details, status) VALUES ('$date', '$time', '$details', '$status')";
+    $sql = "INSERT INTO harvest (date, time, details, status, plot_id) VALUES ('$date', '$time', '$details', '$status', '$plotId')";
 
     if (mysqli_query($conn, $sql)) {
         // Success

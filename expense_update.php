@@ -8,9 +8,10 @@ $date = $_POST['date'];
 $type = $_POST['type'];
 $cost = $_POST['cost'];
 $details = isset($_POST['details']) ? $_POST['details'] : null;
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to update data in the 'expense' table
-$sql = "UPDATE expense SET date = '$date', type = '$type', cost = '$cost', details = '$details' WHERE id = '$id'";
+$sql = "UPDATE expense SET date = '$date', type = '$type', cost = '$cost', details = '$details' WHERE id='$id' AND plot_id = '$plotId'";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

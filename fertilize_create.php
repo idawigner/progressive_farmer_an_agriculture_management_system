@@ -8,9 +8,10 @@ $name = $_POST['name'];
 $quantity = $_POST['quantity'];
 $companyName = $_POST['companyName'];
 $status = $_POST['status'];
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to insert data into the 'fertilize' table
-$sql = "INSERT INTO fertilize (date, name, quantity, company_name, status) VALUES ('$date', '$name', '$quantity', '$companyName', '$status')";
+$sql = "INSERT INTO fertilize (date, name, quantity, company_name, status, plot_id) VALUES ('$date', '$name', '$quantity', '$companyName', '$status', '$plotId')";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

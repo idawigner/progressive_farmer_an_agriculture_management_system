@@ -7,9 +7,10 @@ $date = $_POST['date'];
 $type = $_POST['type'];
 $cost = $_POST['cost'];
 $details = isset($_POST['details']) ? $_POST['details'] : null;
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to insert data into the 'expense' table
-$sql = "INSERT INTO expense (date, type, cost,details) VALUES ('$date', '$type', '$cost', '$details')";
+$sql = "INSERT INTO expense (date, type, cost,details, plot_id) VALUES ('$date', '$type', '$cost', '$details', '$plotId')";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

@@ -9,9 +9,10 @@ $name = $_POST['name'];
 $quantity = $_POST['quantity'];
 $companyName = $_POST['companyName'];
 $status = $_POST['status'];
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to update record in the 'fertilize' table
-$sql = "UPDATE fertilize SET date='$date', name='$name', quantity='$quantity', company_name='$companyName', status='$status' WHERE id=$id";
+$sql = "UPDATE fertilize SET date='$date', name='$name', quantity='$quantity', company_name='$companyName', status='$status' WHERE id='$id' AND plot_id = '$plotId'";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

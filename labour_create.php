@@ -6,9 +6,10 @@ include '../progressive_farmer/db_conn.php';
 $name = $_POST['name'];
 $designation = $_POST['designation'];
 $details = isset($_POST['details']) ? $_POST['details'] : null; // Handle null for empty details
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to insert data into the 'labour' table
-$sql = "INSERT INTO labour (name, designation, details) VALUES ('$name', '$designation', '$details')";
+$sql = "INSERT INTO labour (name, designation, details, plot_id) VALUES ('$name', '$designation', '$details', '$plotId')";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

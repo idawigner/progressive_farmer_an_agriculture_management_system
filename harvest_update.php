@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $time = mysqli_real_escape_string($conn, $_POST['time']);
     $details = mysqli_real_escape_string($conn, $_POST['details']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
     // Update data in the 'harvest' table
-    $sql = "UPDATE harvest SET date='$date', time='$time', details='$details', status='$status' WHERE id='$id'";
+    $sql = "UPDATE harvest SET date='$date', time='$time', details='$details', status='$status' WHERE id='$id' AND plot_id = '$plotId'";
 
     if (mysqli_query($conn, $sql)) {
         // Success

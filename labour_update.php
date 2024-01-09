@@ -7,9 +7,10 @@ $id = $_POST['id'];
 $name = $_POST['name'];
 $designation = $_POST['designation'];
 $details = $_POST['details'];
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to update data in the 'labour' table
-$sql = "UPDATE labour SET name = '$name', designation = '$designation', details = '$details' WHERE id = '$id'";
+$sql = "UPDATE labour SET name = '$name', designation = '$designation', details = '$details' WHERE id='$id' AND plot_id = '$plotId'";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

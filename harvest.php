@@ -38,6 +38,8 @@
                             <option value="Done">Done</option>
                         </select>
                     </div>
+                    <!-- Add a hidden input field to store the plot_id from the URL -->
+                    <input type="hidden" id="plotId" name="plotId" value="<?php echo $_GET['plot_id']; ?>">
 
                     <button type="button" class="btn btn-primary" onclick="createHarvestRecord()">Save</button>
                 </form>
@@ -52,8 +54,9 @@
 <div class="edit-modals-container">
     <?php
     include '../progressive_farmer/db_conn.php';
-    // Retrieve data from the 'harvest' table
-    $sql = "SELECT * FROM harvest";
+    // Retrieve data from the 'sowing' table for a specific plot_id
+    $plotId = mysqli_real_escape_string($conn, $_GET['plot_id']);
+    $sql = "SELECT * FROM harvest WHERE plot_id = '$plotId'";
     $result = mysqli_query($conn, $sql);
 
     // Fetch data once
@@ -88,6 +91,8 @@
                                     <option value="Done" <?php echo ($card['status'] === 'Done') ? 'selected' : ''; ?>>Done</option>
                                 </select>
                             </div>
+                            <!-- Add a hidden input field to store the plot_id from the URL -->
+                            <input type="hidden" id="editPlotId" name="editPlotId" value="<?php echo $_GET['plot_id']; ?>">
 
                             <button type="button" class="btn btn-success" onclick="updateHarvestRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteHarvestRecord(<?php echo $card['id']; ?>)">Delete</button>
@@ -100,7 +105,7 @@
     <?php endwhile;
 
     // Reset the result pointer to the beginning for card display
-    mysqli_data_seek($result, 0);
+//    mysqli_data_seek($result, 0);
     ?>
 </div>
 <!-- End Edit Modals Container -->
@@ -123,7 +128,10 @@
                     <!-- Cards Container -->
                     <div class="row">
                         <!-- Displaying cards -->
-                        <?php while ($card = mysqli_fetch_assoc($result)) : ?>
+                        <?php
+                        $result = mysqli_query($conn, $sql); // Re-run the query to get the correct result set
+                        while ($card = mysqli_fetch_assoc($result)) :
+                            ?>
                             <div class="card-container col-lg-4 col-md-6 col-sm-12">
                                 <div class="card harvest-card">
                                     <div class="card-body task-card-body">
@@ -186,12 +194,14 @@
             var date = document.getElementById('harvestDate').value;
             var time = document.getElementById('harvestTime').value;
             var details = document.getElementById('harvestDetails').value;
+            var plotId = document.getElementById('plotId').value;
 
             // Create FormData object
             var formData = new FormData();
             formData.append('date', date);
             formData.append('time', time);
             formData.append('details', details);
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -220,6 +230,7 @@
             var time = document.getElementById(modalId).querySelector('#editHarvestTime').value;
             var details = document.getElementById(modalId).querySelector('#editHarvestDetails').value;
             var status = document.getElementById(modalId).querySelector('#editHarvestStatus').value; // Add this line
+            var plotId = document.getElementById(modalId).querySelector('#editPlotId').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -228,6 +239,7 @@
             formData.append('time', time);
             formData.append('details', details);
             formData.append('status', status); // Add this line
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -252,6 +264,9 @@
         // Confirm deletion
         var confirmDelete = confirm("Are you sure you want to delete this record?");
         if (confirmDelete) {
+            // Get plot_id from the hidden input in the form
+            var plotId = document.getElementById('editPlotId').value;
+
             // Make an AJAX request to handle deletion
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'harvest_delete.php', true);
@@ -265,7 +280,7 @@
                     alert('Error: ' + response.message);
                 }
             };
-            xhr.send('id=' + id);
+            xhr.send('id=' + id + '&plot_id=' + plotId);
         }
     }
 

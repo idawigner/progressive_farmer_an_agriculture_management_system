@@ -5,7 +5,7 @@
 <div class="wrapper">
 
 
-    <?php include '../progressive_farmer/layouts/main_sidebar.php' ?>
+    <?php include '../progressive_farmer/layouts/plot_sidebar.php' ?>
     <div class="main-panel">
 
         <?php include '../progressive_farmer/layouts/menu.php';
@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h3 style="color: #9DCD5A;">Cultivation Plan for Plot#1, Gondlanwala</h3>
+                            <h3 style="color: #9DCD5A; font-weight: bold">Cultivation Plan for Plot#<?php echo $plot_id; ?></h3>
                         </div>
                     </div>
 

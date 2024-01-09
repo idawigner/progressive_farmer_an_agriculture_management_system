@@ -1,23 +1,25 @@
 <?php
+// Include database connection
 include '../progressive_farmer/db_conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data and sanitize
     $id = mysqli_real_escape_string($conn, $_POST['id']);
+    $plotId = mysqli_real_escape_string($conn, $_POST['plot_id']); // Get plot_id from the form data
 
-    // Delete record from the 'harvest' table
-    $sql = "DELETE FROM harvest WHERE id = '$id'";
+    // SQL query to delete data from the 'spray' table
+    $sql = "DELETE FROM harvest WHERE id = $id AND plot_id = $plotId";
 
+    // Check if the query is successful
     if (mysqli_query($conn, $sql)) {
-        // Success
-        echo json_encode(array("status" => "success"));
-        exit();
+        // Return success status and message
+        $response = array('status' => 'success', 'message' => 'Spray record deleted successfully.');
     } else {
-        // Error
-        echo json_encode(array("status" => "error", "message" => mysqli_error($conn)));
+        // Return error status and message
+        $response = array('status' => 'error', 'message' => 'Error deleting spray record: ' . mysqli_error($conn));
     }
-
-    // Close the database connection
-    mysqli_close($conn);
-    exit();
 }
+// Close the database connection
+mysqli_close($conn);
+
+// Return JSON response
+echo json_encode($response);

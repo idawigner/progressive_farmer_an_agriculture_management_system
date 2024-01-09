@@ -9,9 +9,10 @@ $medicine = $_POST['medicine'];
 $quantity = $_POST['quantity'];
 $details = isset($_POST['details']) ? $_POST['details'] : null;
 $status = $_POST['status'];
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to update data in the 'spray' table
-$sql = "UPDATE spray SET date = '$date', medicine = '$medicine', quantity = '$quantity', details = '$details', status = '$status' WHERE id = $id";
+$sql = "UPDATE spray SET date = '$date', medicine = '$medicine', quantity = '$quantity', details = '$details', status = '$status' WHERE id = $id AND plot_id = $plotId";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {

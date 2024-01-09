@@ -35,6 +35,9 @@
                         <label for="details">Details:</label>
                         <textarea class="form-control" id="details" name="details" placeholder="Optional"></textarea>
                     </div>
+                    <!-- Add a hidden input field to store the plot_id from the URL -->
+                    <input type="hidden" id="plotId" name="plotId" value="<?php echo $_GET['plot_id']; ?>">
+
                     <button type="button" class="btn btn-primary" onclick="createExpenseRecord()">Save</button>
                 </form>
             </div>
@@ -48,8 +51,9 @@
 <div class="edit-modals-container">
     <?php
     include '../progressive_farmer/db_conn.php';
-    // Retrieve data from the 'expense' table
-    $sql = "SELECT * FROM expense";
+    // Retrieve data from the 'sowing' table for a specific plot_id
+    $plotId = mysqli_real_escape_string($conn, $_GET['plot_id']);
+    $sql = "SELECT * FROM expense WHERE plot_id = '$plotId'";
     $result = mysqli_query($conn, $sql);
 
     // Fetch data once
@@ -81,6 +85,9 @@
                                 <label for="editDetails">Details:</label>
                                 <textarea class="form-control" id="editDetails" name="editDetails"><?php echo $card['details']; ?></textarea>
                             </div>
+                            <!-- Add a hidden input field to store the plot_id from the URL -->
+                            <input type="hidden" id="editPlotId" name="editPlotId" value="<?php echo $_GET['plot_id']; ?>">
+
                             <button type="button" class="btn btn-success" onclick="updateExpenseRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteExpenseRecord(<?php echo $card['id']; ?>)">Delete</button>
                         </form>
@@ -92,7 +99,7 @@
     <?php endwhile;
 
     // Reset the result pointer to the beginning for card display
-    mysqli_data_seek($result, 0);
+//    mysqli_data_seek($result, 0);
     ?>
 </div>
 <!-- End Edit Modals Container -->
@@ -115,7 +122,10 @@
                     <!-- Cards Container -->
                     <div class="row">
                         <!-- Displaying cards -->
-                        <?php while ($card = mysqli_fetch_assoc($result)) : ?>
+                        <?php
+                        $result = mysqli_query($conn, $sql); // Re-run the query to get the correct result set
+                        while ($card = mysqli_fetch_assoc($result)) :
+                            ?>
                             <div class="card-container col-lg-4 col-md-6 col-sm-12">
                                 <div class="card expense-card">
                                     <div class="card-body task-card-body">
@@ -178,6 +188,7 @@
             var type = document.getElementById('expenseType').value;
             var cost = document.getElementById('expenseCost').value;
             var details = document.getElementById('details').value;
+            var plotId = document.getElementById('plotId').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -185,6 +196,7 @@
             formData.append('type', type);
             formData.append('cost', cost);
             formData.append('details', details);
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -213,6 +225,7 @@
             var type = document.getElementById(modalId).querySelector('#editExpenseType').value;
             var cost = document.getElementById(modalId).querySelector('#editExpenseCost').value;
             var details = document.getElementById(modalId).querySelector('#editDetails').value;
+            var plotId = document.getElementById(modalId).querySelector('#editPlotId').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -221,6 +234,7 @@
             formData.append('type', type);
             formData.append('cost', cost);
             formData.append('details', details);
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -244,6 +258,9 @@
     function deleteExpenseRecord(id) {
         var confirmDelete = confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
+            // Get plot_id from the hidden input in the form
+            var plotId = document.getElementById('editPlotId').value;
+
             // Make an AJAX request to handle record deletion
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'expense_delete.php', true);
@@ -257,7 +274,7 @@
                     alert('Error: ' + response.message);
                 }
             };
-            xhr.send('id=' + id);
+            xhr.send('id=' + id + '&plot_id=' + plotId);
         }
     }
 

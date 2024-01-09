@@ -130,7 +130,7 @@
 <!-- End Edit Modals Container -->
 
 <div class="wrapper">
-    <?php include '../progressive_farmer/layouts/plot_sidebar.php'; ?>
+    <?php include '../progressive_farmer/layouts/main_sidebar.php'; ?>
     <div class="main-panel">
         <?php include '../progressive_farmer/layouts/menu.php'; ?>
         <!-- End Navbar -->

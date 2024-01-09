@@ -42,6 +42,8 @@
                             <option value="Done">Done</option>
                         </select>
                     </div>
+                    <!-- Add a hidden input field to store the plot_id from the URL -->
+                    <input type="hidden" id="plotId" name="plotId" value="<?php echo $_GET['plot_id']; ?>">
 
                     <button type="button" class="btn btn-primary" onclick="createFertilizeRecord()">Save</button>
                 </form>
@@ -56,8 +58,9 @@
 <div class="edit-modals-container">
     <?php
     include '../progressive_farmer/db_conn.php';
-    // Retrieve data from the 'fertilize' table
-    $sql = "SELECT * FROM fertilize";
+    // Retrieve data from the 'sowing' table for a specific plot_id
+    $plotId = mysqli_real_escape_string($conn, $_GET['plot_id']);
+    $sql = "SELECT * FROM fertilize WHERE plot_id = '$plotId'";
     $result = mysqli_query($conn, $sql);
 
     // Fetch data once
@@ -96,6 +99,8 @@
                                     <option value="Done" <?php echo ($card['status'] === 'Done') ? 'selected' : ''; ?>>Done</option>
                                 </select>
                             </div>
+                            <!-- Add a hidden input field to store the plot_id from the URL -->
+                            <input type="hidden" id="editPlotId" name="editPlotId" value="<?php echo $_GET['plot_id']; ?>">
 
                             <button type="button" class="btn btn-success" onclick="updateFertilizeRecord(<?php echo $card['id']; ?>, 'editModal<?php echo $card['id']; ?>')">Update</button>
                             <button type="button" class="btn btn-danger" onclick="deleteFertilizeRecord(<?php echo $card['id']; ?>)">Delete</button>
@@ -108,7 +113,7 @@
     <?php endwhile;
 
     // Reset the result pointer to the beginning for card display
-    mysqli_data_seek($result, 0);
+//    mysqli_data_seek($result, 0);
     ?>
 </div>
 <!-- End Edit Modals Container -->
@@ -131,7 +136,10 @@
                     <!-- Cards Container -->
                     <div class="row">
                         <!-- Displaying cards -->
-                        <?php while ($card = mysqli_fetch_assoc($result)) : ?>
+                        <?php
+                        $result = mysqli_query($conn, $sql); // Re-run the query to get the correct result set
+                        while ($card = mysqli_fetch_assoc($result)) :
+                            ?>
                             <div class="card-container col-lg-4 col-md-6 col-sm-12">
                                 <div class="card fertilize-card">
                                     <div class="card-body task-card-body">
@@ -196,6 +204,7 @@
             var quantity = document.getElementById('fertilizeQuantity').value;
             var companyName = document.getElementById('fertilizeCompanyName').value;
             var status = 'Pending';  // Set default status to 'Pending'
+            var plotId = document.getElementById('plotId').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -204,6 +213,7 @@
             formData.append('quantity', quantity);
             formData.append('companyName', companyName);
             formData.append('status', status);
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -233,6 +243,7 @@
             var quantity = document.getElementById(modalId).querySelector('#editFertilizeQuantity').value;
             var companyName = document.getElementById(modalId).querySelector('#editFertilizeCompanyName').value;
             var status = document.getElementById(modalId).querySelector('#editFertilizeStatus').value;
+            var plotId = document.getElementById(modalId).querySelector('#editPlotId').value;
 
             // Create FormData object
             var formData = new FormData();
@@ -242,6 +253,7 @@
             formData.append('quantity', quantity);
             formData.append('companyName', companyName);
             formData.append('status', status);
+            formData.append('plotId', plotId);
 
             // Make an AJAX request to handle form submission
             var xhr = new XMLHttpRequest();
@@ -265,6 +277,9 @@
     function deleteFertilizeRecord(id) {
         var confirmDelete = confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
+            // Get plot_id from the hidden input in the form
+            var plotId = document.getElementById('editPlotId').value;
+
             // Make an AJAX request to handle record deletion
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'fertilize_delete.php', true);
@@ -278,7 +293,7 @@
                     alert('Error: ' + response.message);
                 }
             };
-            xhr.send('id=' + id);
+            xhr.send('id=' + id + '&plot_id=' + plotId);
         }
     }
 

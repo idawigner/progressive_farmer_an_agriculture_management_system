@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $seedCompany = mysqli_real_escape_string($conn, $_POST['seedCompany']);
     $details = isset($_POST['details']) ? $_POST['details'] : null;
     $status = 'Pending';  // Set default status to 'Pending'
+    $plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
-    // Insert data into the 'sowing' table
-    $sql = "INSERT INTO sowing (date, seed, seed_company, details, status) VALUES ('$date', '$seed', '$seedCompany', '$details', '$status')";
+    // Insert data into the 'sowing' table with plot_id
+    $sql = "INSERT INTO sowing (date, seed, seed_company, details, status, plot_id) VALUES ('$date', '$seed', '$seedCompany', '$details', '$status', '$plotId')";
 
     if (mysqli_query($conn, $sql)) {
         // Success

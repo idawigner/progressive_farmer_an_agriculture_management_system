@@ -8,9 +8,10 @@ $medicine = $_POST['medicine'];
 $quantity = $_POST['quantity'];
 $details = isset($_POST['details']) ? $_POST['details'] : null;
 $status = $_POST['status'];
+$plotId = mysqli_real_escape_string($conn, $_POST['plotId']); // Get plot_id from the form data
 
 // SQL query to insert data into the 'spray' table
-$sql = "INSERT INTO spray (date, medicine, quantity, details, status) VALUES ('$date', '$medicine', '$quantity', '$details', '$status')";
+$sql = "INSERT INTO spray (date, medicine, quantity, details, status, plot_id) VALUES ('$date', '$medicine', '$quantity', '$details', '$status', '$plotId')";
 
 // Check if the query is successful
 if (mysqli_query($conn, $sql)) {
