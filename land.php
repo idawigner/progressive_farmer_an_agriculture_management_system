@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="en">
-<?php include 'layouts/header.php'  ?>
+<?php include '../progressive_farmer/layouts/header.php'  ?>
 <body>
 <div class="wrapper">
 
 
-    <?php include 'layouts/main_sidebar.php' ?>
+    <?php include '../progressive_farmer/layouts/main_sidebar.php' ?>
     <div class="main-panel">
 
-        <?php include 'layouts/menu.php' ?>
+        <?php include '../progressive_farmer/layouts/menu.php' ?>
         <!-- End Navbar -->
         <div class="content">
             <div class="dashboard-area">
                 <div class="container-fluid">
                     <div class="row">
-
-<!--                        Owned Plot Card -->
+                        <!-- Owned Plot Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
-                                <div class="card">
+                            <a href="cultivation_plan.php?plot_id=1" class="card-link">
+                                <div class="card position-relative"> <!-- Added 'position-relative' class -->
+                                    <img src="assets/img/icons/edit-icon.png" class="plot-edit-icon" alt="Edit Icon">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 1</h5>
                                         <p>
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=2" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 2</h5>
@@ -49,10 +49,9 @@
                                 </div>
                             </a>
                         </div>
-
-<!--                        On-Lease Plot Card -->
+                        <!-- On-Lease Plot Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=3" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 3</h5>
@@ -68,9 +67,8 @@
                             </a>
                         </div>
 
-                        <!--                        Owned Plot Card -->
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=4" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 4</h5>
@@ -85,9 +83,8 @@
                                 </div>
                             </a>
                         </div>
-
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=5" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 5</h5>
@@ -102,9 +99,8 @@
                                 </div>
                             </a>
                         </div>
-
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=6" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 6</h5>
@@ -119,9 +115,8 @@
                                 </div>
                             </a>
                         </div>
-
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="plots.php" class="card-link">
+                            <a href="cultivation_plan.php?plot_id=7" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title" style="color: #9DCD5A; margin-bottom: 20px">Plot # 7</h5>
@@ -137,8 +132,7 @@
                             </a>
                         </div>
 
-
-<!--                        Add New Card-->
+                        <!-- Add New Card-->
                         <div class="card-container col-lg-3 col-md-6">
                             <a href="" class="card-link">
                                 <div class="card">
@@ -155,7 +149,7 @@
             </div>
         </div>
 
-        <?php include 'layouts/Footer.php' ?>
+        <?php include '../progressive_farmer/layouts/Footer.php' ?>
 
     </div>
 

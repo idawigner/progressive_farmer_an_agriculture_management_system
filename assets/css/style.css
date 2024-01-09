@@ -210,6 +210,15 @@ a.card-link:active {
     background-color: transparent;
 }
 
+.plot-edit-icon {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+}
+
 .edit-icon {
     width: 20%;
     justify-self: end;

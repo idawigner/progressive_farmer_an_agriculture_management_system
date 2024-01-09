@@ -18,7 +18,7 @@
 
             <li class="nav-item active">
                 <a class="nav-link sidebar-nav-link" href="sowing.php">
-                    <img src = "assets/img/icons/cultivation-plan-icon.svg" alt="Sowing Icon"/>
+                    <img src = "assets/img/icons/sowing-icon.svg" alt="Sowing Icon"/>
                     <p>Sowing</p>
                 </a>
             </li>

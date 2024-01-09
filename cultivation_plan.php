@@ -8,7 +8,10 @@
     <?php include '../progressive_farmer/layouts/main_sidebar.php' ?>
     <div class="main-panel">
 
-        <?php include '../progressive_farmer/layouts/menu.php' ?>
+        <?php include '../progressive_farmer/layouts/menu.php';
+        //Get plot_id from URL
+        $plot_id = isset($_GET['plot_id']) ? $_GET['plot_id'] : 1; // Default to 1 if plot_id is not provided
+        ?>
         <!-- End Navbar -->
         <div class="content">
             <div class="dashboard-area">
@@ -21,17 +24,17 @@
 
                     <div class="row">
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="sowing.php" class="card-link">
+                            <a href="sowing.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
-                                        <img src = "assets/img/icons/cultivation-plan-icon.svg" alt="Cultivation Plan Icon"/>
+                                        <img src = "assets/img/icons/sowing-icon.svg" alt="Sowing Icon"/>
                                         <h5 class="card-title" style="color: #D66708">Sowing</h5>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="spray.php" class="card-link">
+                            <a href="spray.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/spray-icon.svg" alt="Spray Icon"/>
@@ -41,7 +44,7 @@
                             </a>
                         </div>
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="fertilize.php" class="card-link">
+                            <a href="fertilize.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/fertilize-icon.svg" alt="Fertilize Icon"/>
@@ -51,7 +54,7 @@
                             </a>
                         </div>
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="irrigate.php" class="card-link">
+                            <a href="irrigate.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/irrigate-icon.svg" alt="Irrigate Icon"/>
@@ -61,7 +64,7 @@
                             </a>
                         </div>
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="expense.php" class="card-link">
+                            <a href="expense.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/expense-icon.svg" alt="Expense Icon"/>
@@ -72,7 +75,7 @@
                         </div>
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="labour.php" class="card-link">
+                            <a href="labour.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/labour-icon.svg" alt="Labour Icon"/>
@@ -83,7 +86,7 @@
                         </div>
 
                         <div class="card-container col-lg-3 col-md-6">
-                            <a href="harvest.php" class="card-link">
+                            <a href="harvest.php?plot_id=<?php echo $plot_id; ?>" class="card-link">
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <img src = "assets/img/icons/harvest-icon.svg" alt="Harvest Icon"/>
